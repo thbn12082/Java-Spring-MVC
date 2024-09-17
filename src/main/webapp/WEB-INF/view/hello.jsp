@@ -1,3 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+ <!-- tiền tố c là chúng ta đang dùng core thôi -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,5 +11,7 @@
 </head>
 <body>
     hello from jsp
+    <h1>${thebinh}</h1>
+    <h2>${thebinh2}</h2>
 </body>
 </html>
