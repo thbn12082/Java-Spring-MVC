@@ -43,18 +43,29 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/admin/user")
+    @RequestMapping("/admin/user/create") // get
     public String getUserPage(Model model) {
 
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
+    // để hiển thị ra view bắt buộc phải dùng list để hứng chứ không return luôn đc
+    // tại sao mà khi cả 2 request đều có url thế kia, tại sao không lỗi? vì khi kh
+    // khai báo thì amwcj định là get => chúng khác nhau
 
-    @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User thebinh3) {
         System.out.println("run here: " + thebinh3);
         this.userService.handleSaveUser(thebinh3);
-        return "hello";
+        return "redirect:/admin/user";
+    }
+
+    @RequestMapping("/admin/user")
+    public String tableUser(Model model) {
+        List<User> users = this.userService.handleGetAllUser();
+        model.addAttribute("users1", users);
+        // System.out.println(">>>>>>check User <<<<<<<<: " + users);
+        return "admin/user/tableUser";
     }
 
     @RequestMapping("/")

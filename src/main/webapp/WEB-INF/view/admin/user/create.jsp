@@ -29,7 +29,7 @@
                 <h3>Create a user</h3>
                 <hr />
 
-    <form:form method="post" action="/admin/user/create1" modelAttribute = "newUser">
+    <form:form method="post" action="/admin/user/create" modelAttribute = "newUser">
         <!-- form của html có 2 method chính là get và post, get nó đẩy dữ liệu lên url khi load lại không mất dữ liệu, còn post không đẩy lên url nhưng khi load lại thì mất -->
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email:</label>
