@@ -56,7 +56,7 @@
                         <form:input type="text" class="form-control" path = "address"/>
                     </div>
                     <br>
-                    <a class="btn btn-success" type = "button">Update</a>
+                    <button class="btn btn-success" type = "submit">Update</button>
                     <hr>
                   </form:form>
 

@@ -104,15 +104,13 @@ public class UserController {
         User currentUser = this.userService.handleUserById(user.getId());
         if (currentUser != null) {
             currentUser.setAddress(user.getAddress());
-            currentUser.setEmail(user.getEmail());
+            // currentUser.setEmail(user.getEmail());
             currentUser.setFullname(user.getFullname());
             currentUser.setPhone(user.getPhone());
             this.userService.handleSaveUser(currentUser);
+        } else {
+            this.userService.handleSaveUser(user);
         }
-
-        model.addAttribute("newUser", currentUser);
-
         return "redirect:/admin/user";
     }
-
 }
