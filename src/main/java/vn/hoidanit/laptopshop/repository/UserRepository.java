@@ -10,12 +10,13 @@ import java.util.List;
 //CRUD create read update delete
 @Repository
 // đây là tầng lấy dữ liệu từ db(domain/model )
-// public interface UserRepository extends CrudRepository<User, Long> {
-public interface UserRepository extends JpaRepository<User, Long> {
-    // User save(User thebinh);
-    // mặc định khi kế thừa CrudRepository thì có các method sẵn của framework r
-    // khi dùng thế này sẽ trả về List, ArrayList sẽ bị lỗi
-    // Crud thì trả về Iterable => khó thao tác
-    // còn Jpa trả về List => dễ thao tác
+public interface UserRepository extends CrudRepository<User, Long> {
+    // public interface UserRepository extends JpaRepository<User, Long> {
+
     List<User> findFirstByEmailAndAddress(String email, String address);
+
+    User findById(long id);// tại sao lại là long mà không phải là Optinal?? bởi vì đang xử lý th kh null
+                           // id
+
+    List<User> findAll();
 }
