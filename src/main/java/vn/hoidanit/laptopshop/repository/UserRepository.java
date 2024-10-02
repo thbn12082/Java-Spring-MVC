@@ -18,5 +18,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findById(long id);// tại sao lại là long mà không phải là Optinal?? bởi vì đang xử lý th kh null
                            // id
 
+    void deleteById(long id);
+
     List<User> findAll();
+
 }

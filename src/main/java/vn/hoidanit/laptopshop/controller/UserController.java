@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +48,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/admin/user/create") // get
+    @GetMapping("/admin/user/create")
     public String getUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
@@ -56,14 +57,14 @@ public class UserController {
     // tại sao mà khi cả 2 request đều có url thế kia, tại sao không lỗi? vì khi kh
     // khai báo thì amwcj định là get => chúng khác nhau
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
+    @PostMapping("/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") User thebinh3) {
         System.out.println("run here: " + thebinh3);
         this.userService.handleSaveUser(thebinh3);
         return "redirect:/admin/user";
     }
 
-    @RequestMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String tableUser(Model model) {
         List<User> users = this.userService.handleGetAllUser();
         model.addAttribute("users1", users);
@@ -71,7 +72,7 @@ public class UserController {
         return "admin/user/tableUser";
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String getHomePage(Model model) {
         String test = this.userService.handleHello();
         // List<User> arrUsers = this.userService.handleGetAllUser();
@@ -81,7 +82,7 @@ public class UserController {
         return "hello";
     }
 
-    @RequestMapping("/admin/user/{id}")
+    @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable Long id) {
         // model.addAttribute("newUser", new User());
         User user = this.userService.handleUserById(id);
@@ -91,7 +92,7 @@ public class UserController {
         return "admin/user/show";
     }
 
-    @RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.GET)
+    @GetMapping("/admin/user/update/{id}")
     public String updateUserPage(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
         User currentUser = this.userService.handleUserById(id);
@@ -113,4 +114,22 @@ public class UserController {
         }
         return "redirect:/admin/user";
     }
+
+    @GetMapping("/admin/user/delete/{id}")
+    public String delUser(Model model, @PathVariable Long id) {
+        model.addAttribute("id", id);
+        model.addAttribute("newUser", new User());
+        return "/admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String del(Model model, @ModelAttribute("newUser") User user) {
+        // User currentUser = this.userService.handleUserById(user.getId());
+        // this.userService.handleDelUserById(user);
+        // System.out.println(">>>>>>>>>>>>>>>>" + user.getId() +
+        // "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        this.userService.handleDelUserById(user.getId());
+        return "redirect:/admin/user";
+    }
+
 }
