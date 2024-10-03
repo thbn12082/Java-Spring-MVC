@@ -1,25 +1,43 @@
 package vn.hoidanit.laptopshop.domain;
 
+import java.util.HashSet;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 // trước khi code, đầu tiên la fphair tạo domain
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    Role role;
+
+    // bên one luôn chứa mappedBy
+    @OneToMany(mappedBy = "user")
+    List<Order> order;
 
     private String email;
     private String password;
     private String fullname;
     private String address;
     private String phone;
+    private String avatar;
+    // roleId
+
+    // khóa ngoại kh cần khai báo, kh cần hardcode
 
     public Long getId() {
         return id;
@@ -69,10 +87,18 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
-        return "demo [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
-                + ", address=" + address + ", phone=" + phone + "]";
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 
 }
