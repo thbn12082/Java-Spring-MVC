@@ -69,7 +69,7 @@ public class UserController {
         List<User> users = this.userService.handleGetAllUser();
         model.addAttribute("users1", users);
         // System.out.println(">>>>>>check User <<<<<<<<: " + users);
-        return "admin/user/tableUser";
+        return "admin/user/show";
     }
 
     @GetMapping("/")
@@ -89,7 +89,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("id", id);
         System.out.println(">>>>>>>>>>>>>>>>>check path o day <<<<<<<<<<<<<<<" + id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     @GetMapping("/admin/user/update/{id}")

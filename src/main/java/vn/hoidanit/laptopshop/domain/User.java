@@ -1,3 +1,4 @@
+
 package vn.hoidanit.laptopshop.domain;
 
 import java.util.HashSet;
@@ -21,13 +22,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    Role role;
+    // @ManyToOne
+    // @JoinColumn(name = "role_id")
+    // Role role;
 
-    // bên one luôn chứa mappedBy
-    @OneToMany(mappedBy = "user")
-    List<Order> order;
+    // // bên one luôn chứa mappedBy
+    // @OneToMany(mappedBy = "user")
+    // List<Order> order;
 
     private String email;
     private String password;
@@ -95,10 +96,11 @@ public class User {
         this.avatar = avatar;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
-                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
-    }
+@Override
+public String toString() {
+return "User [id=" + id + ", email=" + email + ", password=" + password + ",
+fullname=" + fullname
++ ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
+}
 
 }
