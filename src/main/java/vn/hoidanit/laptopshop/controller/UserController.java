@@ -2,50 +2,36 @@ package vn.hoidanit.laptopshop.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.repository.UserRepository;
+import vn.hoidanit.laptopshop.service.RoleService;
+import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-// @RestController
-// public class UserController {
-//     // làm sao để truy cập method này??? đóa là lí do cần GetMapping
-//     // @Autowired
-//     private UserService userService;
-
-//      public UserController(UserService userService) {
-//         this.userService = userService;
-//      }
-
-//     @GetMapping("/")
-//     public String getHomePage() {
-//         return this.userService.handleHello();
-//     }
-
-// }
 
 @Controller
 // đây là tầng xử lý yêu cầu web
 public class UserController {
-
+    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final UploadService uploadService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder,
+            RoleService roleService) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @GetMapping("/admin/user/create")
@@ -58,8 +44,19 @@ public class UserController {
     // khai báo thì amwcj định là get => chúng khác nhau
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User thebinh3) {
-        System.out.println("run here: " + thebinh3);
+    public String createUserPage(Model model, @ModelAttribute("newUser") User thebinh3,
+            @RequestParam("thebinhFile") MultipartFile file) {
+        // bắt vô User đây
+
+        String hashPassword = this.passwordEncoder.encode(thebinh3.getPassword());
+
+        String avatar = this.uploadService.handleUploadFile(file, "avatar");
+
+        thebinh3.setPassword(hashPassword);
+        thebinh3.setAvatar(avatar);
+        System.out.println(thebinh3.getRole().getName());
+        System.out.println(this.userService.getRoleByName(thebinh3.getRole().getName()));
+        thebinh3.setRole(this.userService.getRoleByName(thebinh3.getRole().getName()));
         this.userService.handleSaveUser(thebinh3);
         return "redirect:/admin/user";
     }

@@ -31,6 +31,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
-    }
+        registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
+        // tất cả đường link nào xuất phát từ /images/** thì java spring sẽ tìm trong
+        // thư mục "/resources/images/"
 
+    }
 }

@@ -22,13 +22,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @ManyToOne
-    // @JoinColumn(name = "role_id")
-    // Role role;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-    // // bên one luôn chứa mappedBy
-    // @OneToMany(mappedBy = "user")
-    // List<Order> order;
+    // bên one luôn chứa mappedBy
+    @OneToMany(mappedBy = "user")
+    List<Order> order;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
 
     private String email;
     private String password;
