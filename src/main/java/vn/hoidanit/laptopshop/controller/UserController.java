@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.RoleService;
 import vn.hoidanit.laptopshop.service.UploadService;
@@ -54,8 +53,6 @@ public class UserController {
 
         thebinh3.setPassword(hashPassword);
         thebinh3.setAvatar(avatar);
-        System.out.println(thebinh3.getRole().getName());
-        System.out.println(this.userService.getRoleByName(thebinh3.getRole().getName()));
         thebinh3.setRole(this.userService.getRoleByName(thebinh3.getRole().getName()));
         this.userService.handleSaveUser(thebinh3);
         return "redirect:/admin/user";
@@ -69,15 +66,16 @@ public class UserController {
         return "admin/user/show";
     }
 
-    @GetMapping("/")
-    public String getHomePage(Model model) {
-        String test = this.userService.handleHello();
-        // List<User> arrUsers = this.userService.handleGetAllUser();
-        List<User> arrUsers2 = this.userService.handleGetAllUserByNameAndEmail("", "1@gmail.com");
-        model.addAttribute("thebinh", test);
-        model.addAttribute("thebinh2", "đây là nguyễn thế bình");
-        return "hello";
-    }
+    // @GetMapping("/")
+    // public String getHomePage(Model model) {
+    // String test = this.userService.handleHello();
+    // // List<User> arrUsers = this.userService.handleGetAllUser();
+    // List<User> arrUsers2 = this.userService.handleGetAllUserByNameAndEmail("",
+    // "1@gmail.com");
+    // model.addAttribute("thebinh", test);
+    // model.addAttribute("thebinh2", "đây là nguyễn thế bình");
+    // return "hello";
+    // }
 
     @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable Long id) {
@@ -121,10 +119,6 @@ public class UserController {
 
     @PostMapping("/admin/user/delete")
     public String del(Model model, @ModelAttribute("newUser") User user) {
-        // User currentUser = this.userService.handleUserById(user.getId());
-        // this.userService.handleDelUserById(user);
-        // System.out.println(">>>>>>>>>>>>>>>>" + user.getId() +
-        // "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         this.userService.handleDelUserById(user.getId());
         return "redirect:/admin/user";
     }
