@@ -26,6 +26,7 @@ public class Product {
     private double price;
     private String image;
     private String detaiDesc;
+    private String shortDesc;
     private long quantity;
     private long sold;
     private String factory;
@@ -111,5 +112,13 @@ image=" + image + ", detaiDesc="
 factory + ", target="
 + target + "]";
 }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
+    }
 
 }

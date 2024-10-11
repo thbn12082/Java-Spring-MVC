@@ -33,7 +33,29 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active"><a href="/admin">Dashboard</a> /Product</li>
                     </ol>
-                    <span>table product</span>
+
+
+                    <div class = "d-flex justify-content-between"> 
+                             
+                        <h3>Table products</h3>
+                        <a href = "/admin/product/create" class="btn btn-primary">Create a product</a>
+                    </div>
+                    <hr>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Factory</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        
+                      </table>
+                      
+                      
                 </div>
             </main>
            <jsp:include page = "../layout/footer.jsp"/>
