@@ -22,8 +22,12 @@ public class UploadService {
         byte[] bytes;
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
+        if (file.isEmpty()) {
+            return "";
+        }
         try {
             bytes = file.getBytes();
+
             File dir = new File(rootPath + File.separator + targetFolder);
             if (!dir.exists())
                 dir.mkdirs();

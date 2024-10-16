@@ -14,8 +14,6 @@
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
-
-
 <body class="sb-nav-fixed">
     <jsp:include page = "../layout/header.jsp"/>
     <div id="layoutSidenav">
@@ -24,58 +22,55 @@
                 <jsp:include page = "../layout/sidebar.jsp" />
             </nav>
         </div>
+    
         <div id="layoutSidenav_content">
             <main>
-
 
     <div class = "container mt-5">
     <div class = "row">
     <div class="col-md-6 col-12 mx-auto">
 
 <!-- đây là để 2 thuộc tính của thẻ div này sẽ đc căn sang 2 bên, ở giữa sẽ trắng trơn -->
-        <div class = "d-flex justify-content-between"> 
-        <h3>User ${id} Detail </h3>
-        <!-- <a href = "/admin/user/create" class="btn btn-primary">Create a user</a> -->
-        </div>
-        <hr>
-
-        <div class="card" style="width: 60%">
-            <div class="card-header">
-            User Information
+            <h1>Delete the product id = ${id}</h1>
+            <br>
+            <hr>
+            <div class="alert alert-danger" role="alert">
+                Are you sure to delete this product?
             </div>
+            <br>
+            <form:form action="/admin/product/delete" method = "post" modelAttribute = "newProduct">
+                <div class="form-group" style="display: none;">
+                    <label for="formGroupExampleInput" >Id:</label>
+                    <form:input value = "${id}" type="text" class="form-control" path = "id"/>
+                    <!-- đây là cách thêm cứng id -->
+                </div>
+                <button class="btn btn-danger">Confirm</button>
+            </form:form>
+                
+            <hr>
 
-            
 
 
-
-
-
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID: ${id} </li>
-            <li class="list-group-item">Email: ${user.email}</li>
-            <li class="list-group-item">FullName: ${user.fullname}</li>
-            <li class="list-group-item">Address: ${user.address}</li>
-            </ul>
            </div>
-           <br>
-            <a href = "/admin/user" class="btn btn-primary">Back</a>
-           <hr>
-            
-           
         </div>
     </main>
-   <jsp:include page = "../layout/footer.jsp"/>
-</div>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="js/chart-area-demo.js"></script>
-<script src="js/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-crossorigin="anonymous"></script>
-<script src="js/datatables-simple-demo.js"></script>
+  
+  </div>
+  </div>
+  </div>
+  
+  <jsp:include page = "../layout/footer.jsp" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+  crossorigin="anonymous"></script>
+  <script src="js/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="js/chart-area-demo.js"></script>
+  <script src="js/chart-bar-demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+  crossorigin="anonymous"></script>
+  <script src="js/datatables-simple-demo.js"></script>
+  
+  
 </body>
 </html>

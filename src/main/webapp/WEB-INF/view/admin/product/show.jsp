@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 
@@ -33,8 +34,6 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active"><a href="/admin">Dashboard</a> /Product</li>
                     </ol>
-
-
                     <div class = "d-flex justify-content-between"> 
                              
                         <h3>Table products</h3>
@@ -52,7 +51,22 @@
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
-                        
+                        <tbody>
+                            <c:forEach var = "product" items ="${products}">
+                                <tr>
+                                    <td>${product.id}</td>
+                                    <td>${product.name}</td>
+                                    <td><fmt:formatNumber type = "number" value = "${product.price}" /> VND</td>
+                                    
+                                    <td>${product.factory}</td>
+                                    <td>
+                                        <a class="btn btn-success" href="/admin/product/${product.id}">View</a>
+                                        <a class="btn btn-warning" href="/admin/product/update/${product.id}">Update</a>
+                                        <a type="button" class="btn btn-danger" href = "/admin/product/delete/${product.id}">Delete</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
                       </table>
                       
                       

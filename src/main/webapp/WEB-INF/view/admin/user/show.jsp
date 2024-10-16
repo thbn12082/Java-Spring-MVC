@@ -59,19 +59,13 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <!-- private Long id;
-                  
-                            private String email;
-                            private String password;
-                            private String fullname;
-                            private String address;
-                            private String phone; -->
+                        
                   
                             <c:forEach var="user" items="${users1}">
                               <!-- user là biến và user1 là giá trị cta lấy từ bên UserController -->
                   
                               <tr>
-                              <th scope="row">${user.id}</th>
+                              <th>${user.id}</th>
                               <td>${user.email}</td>
                               <td>${user.fullname}</td>
                               <td>${user.role.name}</td>
@@ -95,6 +89,7 @@
                 </div>
             </main>
            <jsp:include page = "../layout/footer.jsp"/>
+        </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

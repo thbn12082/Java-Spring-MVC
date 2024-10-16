@@ -47,17 +47,22 @@ public class UserController {
 
     @PostMapping("/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User thebinh3,
-            BindingResult bindingResult,
+            BindingResult newUserBindingResult,
             @RequestParam("thebinhFile") MultipartFile file) {
         // bắt vô User đây
-        if (bindingResult.hasErrors()) {
+        if (newUserBindingResult.hasErrors()) {
 
-            List<FieldError> errors = bindingResult.getFieldErrors();
+            List<FieldError> errors = newUserBindingResult.getFieldErrors();
             for (FieldError error : errors) {
-                System.out.println(error.getObjectName() + "-" + error.getDefaultMessage());
+                // khi .getField() thì sẽ hiển thị những trường gặp lỗi
+                System.out.println(error.getField() + "-" + error.getDefaultMessage());
             }
 
             return "/admin/user/create";
+            // tại sao lại dùng "/admin/user/create" mà không phải
+            // redirect:/admin/user/create bởi vì để vẫn giữ nguyên thông báo lỗi chứ không
+            // phải nhảy sang trang create mới
+
         } else {
             String hashPassword = this.passwordEncoder.encode(thebinh3.getPassword());
 

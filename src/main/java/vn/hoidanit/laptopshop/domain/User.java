@@ -52,13 +52,13 @@ public class User {
     // sử dụng những annotation phát hiện nhập đúng hay sai ở đây nhưng nó chỉ phát
     // hiện không ngăn chặn nên phải xuống tầng controller xử lý ngăn chặn
     @NotNull
-    @Email
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
     @NotNull
-    @Size(min = 4)
+    @Size(min = 4, message = "pasword is not invalid")
     private String password;
     @NotNull
-    @Size(min = 2)
+    @Size(min = 2, message = "fullname is not invalid")
     private String fullname;
     private String address;
     private String phone;
@@ -123,11 +123,10 @@ public class User {
         this.avatar = avatar;
     }
 
-@Override
-public String toString() {
-return "User [id=" + id + ", email=" + email + ", password=" + password + ",
-fullname=" + fullname
-+ ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
-}
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ",fullname=" + fullname
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
+    }
 
 }
