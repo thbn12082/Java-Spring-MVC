@@ -1,5 +1,8 @@
 package vn.hoidanit.laptopshop.domain.dto;
 
+import vn.hoidanit.laptopshop.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     // DTO đơn thuần là 1 biến Object thôi, nó không chứ logic code, phần thực hiện
     // logic code là mapper, không là 1 lớp thực thể trong table mà chỉ là 1 lớp

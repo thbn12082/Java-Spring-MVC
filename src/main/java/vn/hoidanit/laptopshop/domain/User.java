@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import vn.hoidanit.laptopshop.service.validator.StrongPassword;
 
 // trước khi code, đầu tiên la fphair tạo domain
 
@@ -55,7 +56,8 @@ public class User {
     @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
     @NotNull
-    @Size(min = 4, message = "pasword is not invalid")
+    @Size(min = 4, message = "password is not invalid")
+    @StrongPassword(message = "password length must longer than 8 characters")
     private String password;
     @NotNull
     @Size(min = 2, message = "fullname is not invalid")
